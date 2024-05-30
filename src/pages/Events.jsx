@@ -13,7 +13,7 @@ const Events = () => {
   };
 
   return (
-    <Container centerContent maxW="container.md" py={8}>
+    <Container centerContent maxW="container.md" py={8} mt={16}>
       <VStack spacing={4} width="100%">
         <Text fontSize="2xl">Events</Text>
         {isLoadingVenues ? (
