@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Container, Text, VStack, Box, Button, List, ListItem, Spinner } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { useVenues, useEvents } from "../integrations/supabase/index.js";
 
 const Index = () => {
@@ -48,6 +49,13 @@ const Index = () => {
             )}
           </Box>
         )}
+        <Box width="100%" mt={8}>
+          <Link to="/events">
+            <Button width="100%" colorScheme="teal">
+              Go to Events Page
+            </Button>
+          </Link>
+        </Box>
       </VStack>
     </Container>
   );
