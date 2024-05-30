@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Text, VStack, Box, Button, List, ListItem, Spinner } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+
 import { useVenues, useEvents } from "../integrations/supabase/index.js";
 
 const Index = () => {
   const { data: venues, isLoading: isLoadingVenues } = useVenues();
   const [selectedVenue, setSelectedVenue] = useState(null);
-  const { data: events, isLoading: isLoadingEvents } = useEvents(selectedVenue ? { venue_id: selectedVenue.id } : null);
+  const { data: events, isLoading: isLoadingEvents, refetch } = useEvents(selectedVenue ? { venue_id: selectedVenue.id } : null);
 
   const handleVenueClick = (venue) => {
     setSelectedVenue(venue);
   };
+
+  useEffect(() => {
+    if (selectedVenue) {
+      refetch(); // Refetch events when the selected venue changes
+    }
+  }, [selectedVenue, refetch]);
 
   return (
     <Container centerContent maxW="container.md" py={8}>
@@ -49,13 +55,7 @@ const Index = () => {
             )}
           </Box>
         )}
-        <Box width="100%" mt={8}>
-          <Link to="/events">
-            <Button width="100%" colorScheme="teal">
-              Go to Events Page
-            </Button>
-          </Link>
-        </Box>
+        
       </VStack>
     </Container>
   );
