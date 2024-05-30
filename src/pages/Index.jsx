@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { Container, Text, VStack, Box, Button, List, ListItem, Spinner } from "@chakra-ui/react";
-
 import { useVenues, useEvents } from "../integrations/supabase/index.js";
 
 const Index = () => {
   const { data: venues, isLoading: isLoadingVenues } = useVenues();
   const [selectedVenue, setSelectedVenue] = useState(null);
-  const { data: events, isLoading: isLoadingEvents, refetch } = useEvents(selectedVenue ? { venue_id: selectedVenue.id } : null);
+  const { data: events, isLoading: isLoadingEvents, refetch } = useEvents(selectedVenue ? { venue_id: selectedVenue.id } : {});
 
   const handleVenueClick = (venue) => {
     setSelectedVenue(venue);
@@ -55,7 +54,6 @@ const Index = () => {
             )}
           </Box>
         )}
-        
       </VStack>
     </Container>
   );

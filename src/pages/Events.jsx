@@ -5,7 +5,7 @@ import { useVenues, useEvents } from "../integrations/supabase/index.js";
 const Events = () => {
   const { data: venues, isLoading: isLoadingVenues } = useVenues();
   const [selectedVenue, setSelectedVenue] = useState("");
-  const { data: events, isLoading: isLoadingEvents, refetch } = useEvents(selectedVenue ? { venue_id: selectedVenue } : null);
+  const { data: events, isLoading: isLoadingEvents, refetch } = useEvents(selectedVenue ? { venue_id: selectedVenue } : {});
 
   const handleVenueChange = (e) => {
     setSelectedVenue(e.target.value);
