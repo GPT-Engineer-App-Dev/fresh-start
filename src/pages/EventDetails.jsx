@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Text, VStack, Box, Button, Input, Textarea, Spinner } from "@chakra-ui/react";
 import { useEvent, useAddEvent, useUpdateEvent, useDeleteEvent } from "../integrations/supabase/index.js";
@@ -12,10 +12,20 @@ const EventDetails = () => {
   const deleteEvent = useDeleteEvent();
 
   const [formData, setFormData] = useState({
-    name: event?.name || "",
-    date: event?.date || "",
-    description: event?.description || "",
+    name: "",
+    date: "",
+    description: "",
   });
+
+  useEffect(() => {
+    if (event) {
+      setFormData({
+        name: event.name || "",
+        date: event.date || "",
+        description: event.description || "",
+      });
+    }
+  }, [event]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
