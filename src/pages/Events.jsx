@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Container, Text, VStack, Box, Select, List, ListItem, Spinner } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
+import { Container, Text, VStack, Box, Select, List, ListItem, Spinner, Button } from "@chakra-ui/react";
 import { useVenues, useEvents } from "../integrations/supabase/index.js";
 
 const Events = () => {
@@ -38,6 +39,9 @@ const Events = () => {
                     <Text fontSize="lg">{event.name}</Text>
                     <Text>{event.date}</Text>
                     <Text>{event.description}</Text>
+                    <Button as={RouterLink} to={`/events/${event.id}`} colorScheme="teal" mt={2}>
+                      View Details
+                    </Button>
                   </Box>
                 </ListItem>
               ))}
